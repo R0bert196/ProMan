@@ -34,16 +34,16 @@ def get_boards():
         """
     )
 
-# def create_board(new_name=None):
-#     if not new_name: new_name = 'Board '+str(new_id)
-#     data_manager.execute_select(
-#         """
-#         INSERT INTO boards (id, title) 
-#         VALUES (%(id)s,%(title)s)
-#         """
-#         ,{"id": new_id,"title":new_name}
-#         )
-#     return True
+def get_statuses():
+    """
+    Gather every statuses column in the table of statuses
+    """
+    statuses = data_manager.execute_select(
+        """
+        SELECT * FROM statuses;
+        """)
+    return statuses
+
 
 
 def create_board(title):

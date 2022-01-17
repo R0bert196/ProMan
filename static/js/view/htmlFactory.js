@@ -1,6 +1,7 @@
 export const htmlTemplates = {
     board: 1,
-    card: 2
+    card: 2,
+    status: 3,
 }
 
 export function htmlFactory(template) {
@@ -9,6 +10,8 @@ export function htmlFactory(template) {
             return boardBuilder
         case htmlTemplates.card:
             return cardBuilder
+        case htmlTemplates.status:
+            return statusBuilder
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -68,5 +71,9 @@ function cardBuilder(card) {
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
                 <div class="card-title data-board-id="${card.board_id}" data-card-id=${card.id}">${card.title}</div>
             </div>`;
+};
+
+const statusBuilder = status => {
+    
 };
 

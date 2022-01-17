@@ -28,6 +28,21 @@ export let boardsManager = {
 function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
   console.log(boardId);
+
+
+  // dupa ce da click pe show, o sa incarce coloanele, iar apoi pentru fiecare coloana sa incarce cardurile
+  const statuses = dataHandler.getStatuses()
+
+  // iau fiecare status in parte
+  statuses.foreach(status =>  {
+    // creez HTML-ul pentru statusul respectiv
+    const statusBuilder = htmlFactory(htmlTemplates.status);
+    const content = statusBuilder.boardBuilder(status);
+    // aici urmeaza sa appenduiesc contentul in container, iar abia apoi pentru fiecare status sa ii appenduiesc cardurile
+  
+  });
+  
+
   cardsManager.loadCards(boardId);
   cardsManager.addCards();
 }

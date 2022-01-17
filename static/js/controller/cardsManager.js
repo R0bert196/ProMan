@@ -8,6 +8,8 @@ export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);
     for (let card of cards) {
+      // 1 pentru fiecare status din tabla statuses, sa imi introduca dinamic coloana respectiva cu id si nume in .board-columns
+      // 2 am nevoie sa fac un query prin care sa introduc cardurile care au cards.status_id, cat si cards.board_id egale cu coloana din boardul respectiv
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
       domManager.addChild(`.board-header[data-board-id="${boardId}"]`, content);

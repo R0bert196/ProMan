@@ -50,6 +50,14 @@ def create_board():
     queires.create_board(req['boardTitle'])
     return jsonify({'created': True})
 
+
+@app.route('/api/statuses')
+def get_statuses():
+    """
+    All the statuses, every board will have the same statuses in the begining
+    """
+    return jsonify(queires.get_statuses())
+
 def main():
     app.run(debug=True)
 
