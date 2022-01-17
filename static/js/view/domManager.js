@@ -15,4 +15,7 @@ export let domManager = {
       console.error("could not find such html element: " + parentIdentifier);
     }
   },
+  querySelector(item) {
+    return document.querySelector(item);
+  },
 };

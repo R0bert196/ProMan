@@ -2,6 +2,8 @@ import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 
+
+
 export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);
@@ -16,6 +18,31 @@ export let cardsManager = {
       );
     }
   },
+  addCards: async function() {
+    domManager.addEventListener('.board-add', 'click', addCards)
+    }
+
 };
+
+const addCards = (clickEvent) => {
+  console.log(clickEvent.targer)
+}
+
+// const addCard = (click) => {
+//   console.log(click)
+// }
+
+
+
+
+
+// add event listener to board header to listen for the button AddNew 
+
+// domManager.addEventListener('.board-add', 'click', addCard)
+
+
+
+// dataHandler.createNewCard()
+
 
 function deleteButtonHandler(clickEvent) {}
