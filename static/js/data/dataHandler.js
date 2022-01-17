@@ -1,3 +1,5 @@
+const container = document.querySelector('.board-container')
+
 export let dataHandler = {
   getBoards: async function () {
     const response = await apiGet("/api/boards");
@@ -21,6 +23,26 @@ export let dataHandler = {
   },
   createNewBoard: async function (boardTitle) {
     // creates new board, saves it and calls the callback function with its data
+    container.innerHTML = ''
+    let toSend = {
+      boardTitle,
+    }
+    const request = await fetch('/api/create_board',{
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toSend)
+    });
+    const response = await request.json()
+    console.log(response)
+    return(response)
+    // nu am ce face cu raspunsul, pt ca nu updatez DOM-ul cu query, ci il adaug manual
+    
+
+
+
+
   },
   createNewCard: async function (cardTitle, boardId, statusId) {
     // creates new card, saves it and calls the callback function with its data
@@ -37,7 +59,11 @@ async function apiGet(url) {
   }
 }
 
-async function apiPost(url, payload) {}
+//payload is an objcet
+export async function apiPost(url, payload) {};
+
+
+
 
 async function apiDelete(url) {}
 

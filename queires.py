@@ -34,6 +34,30 @@ def get_boards():
         """
     )
 
+# def create_board(new_name=None):
+#     if not new_name: new_name = 'Board '+str(new_id)
+#     data_manager.execute_select(
+#         """
+#         INSERT INTO boards (id, title) 
+#         VALUES (%(id)s,%(title)s)
+#         """
+#         ,{"id": new_id,"title":new_name}
+#         )
+#     return True
+
+
+def create_board(title):
+    print(title)
+    new_id = data_manager.execute_select("SELECT count(id) as counter from boards")[0]['counter'] + 1
+    data_manager.execute_insert(
+        """
+        INSERT INTO boards (id, title) 
+        VALUES (%(id)s,%(title)s)
+        """
+        ,{"id": new_id,"title":title}
+        )
+    
+
 
 def get_cards_for_board(board_id):
     # remove this code once you implement the database
@@ -49,4 +73,14 @@ def get_cards_for_board(board_id):
 
     return matching_cards
 
+
+# def create_board(title):
+#     return data_manager.execute_select(
+#         """
+#         INSERT INTO boards VALUES(
+#             39
+#         )
+#         ;
+#         """
+#     )
 

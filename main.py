@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, jsonify
+from flask import Flask, render_template, url_for, jsonify, request,redirect
 from dotenv import load_dotenv
 
 
@@ -37,6 +37,18 @@ def get_cards_for_board(board_id: int):
     """
     return jsonify(queires.get_cards_for_board(board_id))
 
+@app.route("/api/dragos")
+def functii_test():
+    queires.test_dragos()
+    return redirect('/')
+
+
+@app.route('/api/create_board', methods=['POST'])
+def create_board():
+    req = request.get_json()
+    print(req)
+    queires.create_board(req['boardTitle'])
+    return jsonify({'created': True})
 
 def main():
     app.run(debug=True)
