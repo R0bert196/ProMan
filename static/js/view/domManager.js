@@ -18,4 +18,7 @@ export let domManager = {
   querySelector(item) {
     return document.querySelector(item);
   },
+  addCardToBoard(boardId) {
+    const board = 
+  }
 };
