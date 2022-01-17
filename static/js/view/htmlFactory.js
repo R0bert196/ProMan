@@ -30,8 +30,8 @@ export function boardBuilder(board) {
             <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
         </div>
 
-        <div class="board-columns" data-status-id='1'>
-            <div class="board-column">
+        <div class="board-columns">
+            <div class="board-column" data-status-id='1'>
                 <div class="board-column-title">New</div>
                 <div class="board-column-content">
                     
