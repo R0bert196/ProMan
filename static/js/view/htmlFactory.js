@@ -33,31 +33,9 @@ export function boardBuilder(board) {
             <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
         </div>
 
-        <div class="board-columns">
-            <div class="board-column" data-status-id='1'>
-                <div class="board-column-title">New</div>
-                <div class="board-column-content">
-                    
-                </div>
-            </div>
-            <div class="board-column" data-status-id='2'>
-                <div class="board-column-title">In Progress</div>
-                <div class="board-column-content">
-
-                </div>
-            </div>
-            <div class="board-column" data-status-id='3'>
-                <div class="board-column-title">Testing</div>
-                <div class="board-column-content">
-                
-                </div>
-            </div>
-            <div class="board-column" data-status-id='4'>
-                <div class="board-column-title">Done</div>
-                <div class="board-column-content">
-                    
-                </div>
-            </div>
+        <div class="board-columns" data-board-id="${board.id}">
+            
+            
         </div>
     </section>`;
             
@@ -74,6 +52,14 @@ function cardBuilder(card) {
 };
 
 const statusBuilder = status => {
-    
+
+    return `
+    <div class="board-column" data-status-id='${status.status_id}'>
+        <div class="board-column-title">${status.status_title}</div>
+        <div class="board-column-content">
+                    
+        </div>
+    </div>
+    `
 };
 

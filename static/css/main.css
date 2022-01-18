@@ -17,7 +17,7 @@
     cursor: pointer;
   }
 
-  :root{
+:root{
     --border-radius: 3px;
     --status-1: #590000;
     --status-2: #594300;

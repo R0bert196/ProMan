@@ -84,3 +84,19 @@ def get_cards_for_board(board_id):
 #         """
 #     )
 
+
+def get_board_details(board_id):
+    return data_manager.execute_select(
+    """
+    SELECT statuses.id as status_id, statuses.title as status_title, cards.card_order as card_order, cards.title as card_title
+    FROM cards INNER JOIN boards
+    ON cards.board_id=boards.id
+    INNER JOIN statuses
+    ON cards.status_id=statuses.id
+    WHERE boards.id = %(board_id)s
+    ORDER BY boards.title ASC, statuses.id ASC, cards.card_order ASC
+
+
+    """,
+    variables={'board_id': board_id}
+    )
