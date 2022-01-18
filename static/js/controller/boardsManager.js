@@ -28,63 +28,73 @@ export let boardsManager = {
 async function showHideButtonHandler  (clickEvent) {
   
   const boardId = clickEvent.target.dataset.boardId;
-  
+  console.log(clickEvent.target)
   console.log(boardId);
-
-  // VERIFICA DACA ESTE DEJA AFISAT ! DACA DA ATUNCI STERGE CONTINUTUL BOARD_COLUMNS ! SI IESI
-
-  const uniqueStatuses = await dataHandler.getStatuses()
-  
-  console.log("UNIQUE statuses :",uniqueStatuses)
-  
-  const boardContent =  await dataHandler.getBoardContent(boardId)
-
-  console.log("All content :",boardContent)
-  
-  
-  //generate html for each column
-  
-  uniqueStatuses.forEach(uniqueStatus => {
-    //aici intra factory de coloana
-    const boardBuilder = htmlFactory(htmlTemplates.status);
-    const content = boardBuilder(uniqueStatus);
+  if (clickEvent.target.classList.contains('hidden')) {
+    clickEvent.target.classList.remove('hidden');
     
-    domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
+
+    // VERIFICA DACA ESTE DEJA AFISAT ! DACA DA ATUNCI STERGE CONTINUTUL BOARD_COLUMNS ! SI IESI
+
+    const uniqueStatuses = await dataHandler.getStatuses()
     
-    let uniqueCards = []
-    console.log('alaaaaaa')
-    // aici avem toate cardurile pentru boardul cu id-ul corespunzator
-    console.log(boardContent)
-    boardContent.forEach( card => {
-      if (card.status_id==uniqueStatus.id) {
-        // aici intra factory de card
-        // sdasdas
-        cardsManager.addCards(card, boardId, uniqueStatus.id)
-        
-        uniqueCards.push(card)} 
-      })
-      console.log(uniqueCards)
+    console.log("UNIQUE statuses :",uniqueStatuses)
+    
+    const boardContent =  await dataHandler.getBoardContent(boardId)
+
+    console.log("All content :",boardContent)
+    
+    
+    //generate html for each column
+    
+    uniqueStatuses.forEach(uniqueStatus => {
+      //aici intra factory de coloana
+      const boardBuilder = htmlFactory(htmlTemplates.status);
+      const content = boardBuilder(uniqueStatus);
       
-  })
+      domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
+      
+      let uniqueCards = []
+      console.log('alaaaaaa')
+      // aici avem toate cardurile pentru boardul cu id-ul corespunzator
+      console.log(boardContent)
+      boardContent.forEach( card => {
+        if (card.status_id==uniqueStatus.id) {
+          // aici intra factory de card
+          // sdasdas
+          cardsManager.addCards(card, boardId, uniqueStatus.id)
+          
+          uniqueCards.push(card)} 
+        })
+        console.log(uniqueCards)
+        
+    })
 
 
-  // construim fiecare status in parte (ex where status_id = 1)
-  // initializam coloana (statusul)
-  // ordonam crescator cartile din fiecare status in parte
-  // adaugam pe rand cartile in tabul de status
-  // adaugam statusul completat la board
-  
-  // iau fiecare status in parte
-  // statusesCards.forEach(statusCard =>  {
-  //   // creez HTML-ul pentru statusul respectiv
-  //   const statusBuilder = htmlFactory(htmlTemplates.status);
-  //   const content = statusBuilder.boardBuilder(status);
+    // construim fiecare status in parte (ex where status_id = 1)
+    // initializam coloana (statusul)
+    // ordonam crescator cartile din fiecare status in parte
+    // adaugam pe rand cartile in tabul de status
+    // adaugam statusul completat la board
+    
+    // iau fiecare status in parte
+    // statusesCards.forEach(statusCard =>  {
+    //   // creez HTML-ul pentru statusul respectiv
+    //   const statusBuilder = htmlFactory(htmlTemplates.status);
+    //   const content = statusBuilder.boardBuilder(status);
 
-  //   // aici urmeaza sa appenduiesc contentul in container, iar abia apoi pentru fiecare status sa ii appenduiesc cardurile
-  
-  // });
-  
+    //   // aici urmeaza sa appenduiesc contentul in container, iar abia apoi pentru fiecare status sa ii appenduiesc cardurile
+    
+    // });
+    
 
-  cardsManager.loadCards(boardId);
-  cardsManager.addCards();
+    // cardsManager.loadCards(boardId);
+    // cardsManager.addCards();
+  }
+  else{
+    clickEvent.target.classList.add('hidden');
+    console.log('asta e next sibling')
+    console.log(clickEvent.target.parentElement.nextElementSibling)
+    clickEvent.target.parentElement.nextElementSibling.innerHTML = ''
+  }
 }

@@ -30,7 +30,7 @@ export function boardBuilder(board) {
     <section class="board" data-board>
         <div class="board-header"><span class="board-title">${board.title}</span>
             <button class="board-add">Add Card</button>
-            <button class="board-toggle" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
+            <button class="board-toggle hidden" data-board-id="${board.id}"><i class="fas fa-chevron-down"></i></button>
         </div>
 
         <div class="board-columns" data-board-id="${board.id}">
@@ -47,7 +47,7 @@ export function boardBuilder(board) {
 function cardBuilder(card) {
     return `<div class="card">
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title data-board-id="${card.board_id}" data-card-id=${card.card_id}">${card.card_title}</div>
+                <div class="card-title data-card-order='${card.card_order}' data-board-id="${card.board_id}" data-card-id=${card.card_id}">${card.card_title}</div>
             </div>`;
 };
 
