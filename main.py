@@ -51,13 +51,13 @@ def create_board():
     return jsonify({'created': True})
 
 
-@app.route('/api/board/content')
+@app.route('/api/board/content',methods=['POST','GET'])
 def get_board_content():
     """
     All the statuses, every board will have the same statuses in the begining
     """
-    board_no=2
-    return jsonify(queires.get_board_details(board_no))
+    board_id= request.get_json()['boardId']
+    return jsonify(queires.get_board_details(board_id))
 
 def main():
     app.run(debug=True)

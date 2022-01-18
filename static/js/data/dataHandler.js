@@ -8,10 +8,21 @@ export let dataHandler = {
   getBoard: async function (boardId) {
     // the board is retrieved and then the callback function is called with the board
   },
-  getBoardContent: async function () {
+  getBoardContent: async function (boardId) {
     // the statuses are retrieved and then the callback function is called with the statuses
-    const respone = await apiGet(`api/board/content`);
-    return respone;
+    let toSend = {
+      'boardId': boardId,
+    }
+    const request = await fetch(`api/board/content`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toSend)
+    });
+    const response = await request.json()
+    console.log(response)
+    return(response)
   },
   getStatus: async function (statusId) {
     // the status is retrieved and then the callback function is called with the status
