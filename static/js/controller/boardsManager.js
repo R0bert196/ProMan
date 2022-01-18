@@ -51,45 +51,21 @@ async function showHideButtonHandler  (clickEvent) {
       //aici intra factory de coloana
       const boardBuilder = htmlFactory(htmlTemplates.status);
       const content = boardBuilder(uniqueStatus);
-      
       domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
       
       let uniqueCards = []
-      console.log('alaaaaaa')
       // aici avem toate cardurile pentru boardul cu id-ul corespunzator
       console.log(boardContent)
       boardContent.forEach( card => {
         if (card.status_id==uniqueStatus.id) {
-          // aici intra factory de card
-          // sdasdas
           cardsManager.addCards(card, boardId, uniqueStatus.id)
-          
           uniqueCards.push(card)} 
         })
         console.log(uniqueCards)
+        cardsManager.enableDragAndDrop()
         
     })
 
-
-    // construim fiecare status in parte (ex where status_id = 1)
-    // initializam coloana (statusul)
-    // ordonam crescator cartile din fiecare status in parte
-    // adaugam pe rand cartile in tabul de status
-    // adaugam statusul completat la board
-    
-    // iau fiecare status in parte
-    // statusesCards.forEach(statusCard =>  {
-    //   // creez HTML-ul pentru statusul respectiv
-    //   const statusBuilder = htmlFactory(htmlTemplates.status);
-    //   const content = statusBuilder.boardBuilder(status);
-
-    //   // aici urmeaza sa appenduiesc contentul in container, iar abia apoi pentru fiecare status sa ii appenduiesc cardurile
-    
-    // });
-    
-
-    // cardsManager.loadCards(boardId);
-    // cardsManager.addCards();
   }
   else{
     clickEvent.target.classList.add('hidden');
