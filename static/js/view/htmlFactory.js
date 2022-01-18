@@ -47,16 +47,16 @@ export function boardBuilder(board) {
 function cardBuilder(card) {
     return `<div class="card">
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title data-board-id="${card.board_id}" data-card-id=${card.id}">${card.title}</div>
+                <div class="card-title data-board-id="${card.board_id}" data-card-id=${card.card_id}">${card.card_title}</div>
             </div>`;
 };
 
 const statusBuilder = status => {
 
     return `
-    <div class="board-column" data-status-id='${status.status_id}'>
-        <div class="board-column-title">${status.status_title}</div>
-        <div class="board-column-content">
+    <div class="board-column" data-status-id='${status.id}'>
+        <div class="board-column-title">${status.title}</div>
+        <div class="board-column-content" data-status-id='${status.id}'>
                     
         </div>
     </div>

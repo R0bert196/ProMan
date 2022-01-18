@@ -26,49 +26,45 @@ export let boardsManager = {
 
 
 async function showHideButtonHandler  (clickEvent) {
+  
   const boardId = clickEvent.target.dataset.boardId;
+  
   console.log(boardId);
 
   // VERIFICA DACA ESTE DEJA AFISAT ! DACA DA ATUNCI STERGE CONTINUTUL BOARD_COLUMNS ! SI IESI
 
-  const boardContent =  await dataHandler.getBoardContent(boardId)
-  let uniqueStatuses = []
-
-  console.log("All statuses :",boardContent)
+  const uniqueStatuses = await dataHandler.getStatuses()
   
-  boardContent.forEach(statuscard => {
-    let cur_status = {'status_id': statuscard.status_id,
-      'status_title': statuscard.status_title
-      }
-    if (uniqueStatuses.length == 0) uniqueStatuses.push(cur_status);
-    else {
-      let exists = 0
-      uniqueStatuses.forEach(uniqueStatus => {
-        if (uniqueStatus.status_id==cur_status.status_id) exists++
-        })
-      if (exists == 0 ) {
-        uniqueStatuses.push(cur_status)
-        }
-      }
-    });
-
   console.log("UNIQUE statuses :",uniqueStatuses)
   
+  const boardContent =  await dataHandler.getBoardContent(boardId)
+
+  console.log("All content :",boardContent)
+  
+  
+  //generate html for each column
   
   uniqueStatuses.forEach(uniqueStatus => {
-    //generate html for each column
-
+    //aici intra factory de coloana
     const boardBuilder = htmlFactory(htmlTemplates.status);
     const content = boardBuilder(uniqueStatus);
-    domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
-
-    let uniqueCards = []
-    boardContent.forEach( card => {
-      if (card.status_id==uniqueStatus.status_id) {uniqueCards.push(card)} 
-      //daca cardul are statusul corect atunci adauga-l la coloana
-    })
-    // console.log(unique_status,uniqueCards)
     
+    domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
+    
+    let uniqueCards = []
+    console.log('alaaaaaa')
+    // aici avem toate cardurile pentru boardul cu id-ul corespunzator
+    console.log(boardContent)
+    boardContent.forEach( card => {
+      if (card.status_id==uniqueStatus.id) {
+        // aici intra factory de card
+        // sdasdas
+        cardsManager.addCards(card, boardId, uniqueStatus.id)
+        
+        uniqueCards.push(card)} 
+      })
+      console.log(uniqueCards)
+      
   })
 
 

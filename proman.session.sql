@@ -1,6 +1,10 @@
 -- SELECT * FROM cards;
 -- SELECT * FROM statuses;
-SELECT * FROM boards;
+
+update  cards
+set title = 'robert'
+where cards.id = 7;
+SELECT * FROM cards;
 
 -- SELECT cards.title as card_title, cards.card_order as card_order, statuses.title as status_title, statuses.id as status_id, boards.title as board_title
 -- FROM cards INNER JOIN boards

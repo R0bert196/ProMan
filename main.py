@@ -57,7 +57,16 @@ def get_board_content():
     All the statuses, every board will have the same statuses in the begining
     """
     board_id= request.get_json()['boardId']
+    print(board_id)
+    print(queires.get_board_details(board_id))
     return jsonify(queires.get_board_details(board_id))
+
+@app.route('/api/status/content',methods=['POST','GET'])
+def get_status_content():
+    """
+    returns all the statuses in the db
+    """
+    return jsonify(queires.get_statuses())
 
 def main():
     app.run(debug=True)

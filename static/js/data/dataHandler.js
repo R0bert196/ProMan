@@ -8,6 +8,13 @@ export let dataHandler = {
   getBoard: async function (boardId) {
     // the board is retrieved and then the callback function is called with the board
   },
+  getStatuses: async function () {
+    const request = await fetch(`api/status/content`)
+    const response = await request.json()
+    // console.log(response)
+    return(response)
+  }
+  ,
   getBoardContent: async function (boardId) {
     // the statuses are retrieved and then the callback function is called with the statuses
     let toSend = {
@@ -21,7 +28,7 @@ export let dataHandler = {
       body: JSON.stringify(toSend)
     });
     const response = await request.json()
-    console.log(response)
+    // console.log(response)
     return(response)
   },
   getStatus: async function (statusId) {
