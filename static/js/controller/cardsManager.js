@@ -12,7 +12,7 @@ let newCardProperties = {
   status_id : null,
   board_id : null,
   card_id : null,
-  card_order : 1,
+  card_order : null,
 }
 
 
@@ -149,18 +149,20 @@ const handleDrop = (e) => {
     dropzone.insertBefore(ui.dragged, afterElement)
   }
   
-  console.log('detaliile elementului carat' , ui.dragged.dataset.cardId);
+  // console.log(ui.dragged.parentElement)
+  // let order = selectOrder(ui.dragged, ui.dragged.parentElement);
+  // console.log(order);
+  // console.log('detaliile elementului carat' , ui.dragged.dataset.cardId);
   newCardProperties.card_id = ui.dragged.children[1].dataset.cardId;
   newCardProperties.board_id = ui.dragged.parentElement.parentElement.parentElement.dataset.boardId;
   newCardProperties.status_id = ui.dragged.parentElement.dataset.statusId;
+  newCardProperties.card_order = selectOrder(ui.dragged, ui.dragged.parentElement);
   // console.log('card_id' + ui.dragged.children[1].dataset.cardId)
   // console.log('board_id' + ui.dragged.parentElement.parentElement.parentElement.dataset.boardId)
   // console.log('status_id' + ui.dragged.parentElement.dataset.statusId)
-  // console.log(newCardProperties)
-
-  console.log(ui.dragged.parentElement)
-  let order = selectOrder(ui.dragged, ui.dragged.parentElement);
-  console.log(order);
+  console.log('Values to be sent final check : ',newCardProperties)
+  dataHandler.updateCard(newCardProperties)
+  
 
   // dropzone.parentNode.insertBefore(ui.dragged, dropzone);
   // e.currentTarget.parentNode.insertBefore(ui.dragged, e.currentTarget);

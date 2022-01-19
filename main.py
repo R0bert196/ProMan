@@ -76,7 +76,8 @@ def update_card():
 # (board_id)s,
 # (status_id)s
 # (card_order)s,
-    queires.update_card(card_id)
+    queires.update_card(card_id['card'])
+    return True
 
 def main():
     app.run(debug=True)

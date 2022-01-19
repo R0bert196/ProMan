@@ -113,7 +113,7 @@ def update_card(card_details):
     data_manager.execute_insert(
         """
         UPDATE cards
-        SET card_order = card_order+1,
+        SET card_order = card_order+1
         WHERE card_order >= %(card_order)s AND board_id=%(board_id)s;
         """,card_details)
 
@@ -125,3 +125,4 @@ def update_card(card_details):
         status_id = %(status_id)s
         WHERE cards.id = %(card_id)s;
         """, card_details)
+    return True
