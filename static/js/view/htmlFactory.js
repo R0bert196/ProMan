@@ -56,9 +56,7 @@ const statusBuilder = status => {
     return `
     <div class="board-column" data-status-id='${status.id}'>
         <div class="board-column-title" contentEditable="true" data-status-id='${status.id}'>${status.title}</div>
-        <div class="board-column-content" data-status-id='${status.id}'>
-                    
-        </div>
+        <div class="board-column-content" data-status-id='${status.id}'></div>
     </div>
     `
 };
