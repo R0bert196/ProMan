@@ -68,6 +68,16 @@ def get_status_content():
     """
     return jsonify(queires.get_statuses())
 
+@app.route('/api/update/card',methods=['POST'])
+def update_card():
+    card_id=request.get_json()
+    print("detaliile primite sunt :  ", str(card_id))
+# (card_id)s
+# (board_id)s,
+# (status_id)s
+# (card_order)s,
+    queires.update_card(card_id)
+
 def main():
     app.run(debug=True)
 

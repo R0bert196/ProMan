@@ -107,3 +107,21 @@ def get_statuses():
         SELECT * FROM statuses
         """
     )
+
+def update_card(card_details):
+    
+    data_manager.execute_insert(
+        """
+        UPDATE cards
+        SET card_order = card_order+1,
+        WHERE card_order >= %(card_order)s AND board_id=%(board_id)s;
+        """,card_details)
+
+    data_manager.execute_insert(
+        """
+        UPDATE cards
+        SET board_id = %(board_id)s,
+        card_order = %(card_order)s,
+        status_id = %(status_id)s
+        WHERE cards.id = %(card_id)s;
+        """, card_details)

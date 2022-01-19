@@ -45,9 +45,9 @@ export function boardBuilder(board) {
 
 
 function cardBuilder(card) {
-    return `<div class="card">
+    return `<div class="card" data-card-order='${card.card_order}' data-board-id="${card.board_id}" data-card-id="${card.card_id}">
                 <div class="card-remove"><i class="fas fa-trash-alt"></i></div>
-                <div class="card-title data-card-order='${card.card_order}' data-board-id="${card.board_id}" data-card-id=${card.card_id}">${card.card_title}</div>
+                <div class="card-title data-card-order='${card.card_order}' data-board-id="${card.board_id}" data-card-id="${card.card_id}">${card.card_title}</div>
             </div>`;
 };
 

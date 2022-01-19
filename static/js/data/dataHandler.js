@@ -88,3 +88,14 @@ export async function apiPost(url, payload) {};
 async function apiDelete(url) {}
 
 async function apiPut(url) {}
+
+
+// body > div.board-container > section:nth-child(1) > div.board-columns > div:nth-child(1) > div.board-column-content > div
+// body > div.board-container > section:nth-child(3) > div.board-columns > div:nth-child(1) > div.board-column-content > div > div.card-title.data-card-order\=\'1\'.data-board-id\
+// body > div.board-container > section:nth-child(3) > div.board-columns > div:nth-child(3) > div.board-column-content > div > div.card-title.data-card-order\=\'1\'.data-board-id\
+
+// body > div.board-container > section:nth-child(1) > div.board-columns > div:nth-child(4) > div.board-column-content > div:nth-child(2) > div.card-title.data-card-order\=\'2\'.data-board-id\=
+
+// // section:nth-child(n) == boardul
+// // div:nth-child(n) == coloana
+//div:nth-child(2)
