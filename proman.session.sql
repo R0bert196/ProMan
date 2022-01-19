@@ -1,6 +1,8 @@
 SELECT * FROM cards;
 -- SELECT * FROM statuses;
 
+-- SELECT * FROM boards
+
 -- update  cards
 -- set board_id = 1,
 -- card_order = 2

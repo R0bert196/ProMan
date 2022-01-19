@@ -30,6 +30,7 @@ def get_boards():
     return data_manager.execute_select(
         """
         SELECT * FROM boards
+        ORDER BY id ASC
         ;
         """
     )
@@ -105,6 +106,7 @@ def get_statuses():
     return data_manager.execute_select(
         """
         SELECT * FROM statuses
+        ORDER BY id ASC
         """
     )
 
@@ -125,4 +127,28 @@ def update_card(card_details):
         status_id = %(status_id)s
         WHERE cards.id = %(card_id)s;
         """, card_details)
-    return True
+  
+def update_board_name(board_details):
+    data_manager.execute_insert(
+        """
+        UPDATE boards
+        SET title = %(board_name)s
+        WHERE id = %(board_id)s;
+        """, board_details)
+
+def update_status_name(status_details):
+    data_manager.execute_insert(
+        """
+        UPDATE statuses
+        SET title = %(status_name)s
+        WHERE id = %(status_id)s;
+        """, status_details)
+
+def update_card_name(card_details):
+    data_manager.execute_insert(
+        """
+        UPDATE cards
+        SET title = %(card_name)s
+        WHERE id = %(card_id)s;
+        """, card_details)
+

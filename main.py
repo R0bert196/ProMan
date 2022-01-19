@@ -46,7 +46,7 @@ def functii_test():
 @app.route('/api/create_board', methods=['POST'])
 def create_board():
     req = request.get_json()
-    print(req)
+    # print(req)
     queires.create_board(req['boardTitle'])
     return jsonify({'created': True})
 
@@ -57,8 +57,6 @@ def get_board_content():
     All the statuses, every board will have the same statuses in the begining
     """
     board_id= request.get_json()['boardId']
-    print(board_id)
-    print(queires.get_board_details(board_id))
     return jsonify(queires.get_board_details(board_id))
 
 @app.route('/api/status/content',methods=['POST','GET'])
@@ -71,13 +69,28 @@ def get_status_content():
 @app.route('/api/update/card',methods=['POST'])
 def update_card():
     card_id=request.get_json()
-    print("detaliile primite sunt :  ", str(card_id))
-# (card_id)s
-# (board_id)s,
-# (status_id)s
-# (card_order)s,
     queires.update_card(card_id['card'])
-    return True
+    return jsonify(True)
+
+@app.route('/api/update/board-name',methods=['POST'])
+def update_board_name():
+    board=request.get_json()
+    queires.update_board_name(board)
+    return jsonify(True)
+
+@app.route('/api/update/status-name',methods=['POST'])
+def update_status_name():
+    status=request.get_json()
+    print(str(status))
+    queires.update_status_name(status)
+    return jsonify(True)
+
+@app.route('/api/update/card-name',methods=['POST'])
+def update_card_name():
+    card=request.get_json()
+    print(str(card))
+    # queires.update_card_name(card)
+    return jsonify(True)
 
 def main():
     app.run(debug=True)

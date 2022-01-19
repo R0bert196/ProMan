@@ -28,6 +28,7 @@ export let cardsManager = {
         "click",
         deleteButtonHandler
       );
+      
     }
   },
   addCards: async function(card, boardId, uniqueStatusId) {
@@ -103,6 +104,8 @@ const initDropZone = () => {
 const handleDragStart = (e) => {
   
   ui.dragged = e.currentTarget;
+  console.log(ui.dragged)
+  ui.dragged.children[1].contentEditable = 'false'
   ui.dragged.classList.add('curr-dragging');
   console.log("Drag start of", ui.dragged);
   //sa adaug functie sa highlightuiesc sloturile disponibile
@@ -112,6 +115,7 @@ const handleDragStart = (e) => {
 
 const handleDragEnd = () => {
   console.log("Drag end of", ui.dragged);
+  ui.dragged.children[1].contentEditable = 'true'
   ui.dragged.classList.remove('curr-dragging');
   ui.dragged = null;
   // removeHighlightCardSlots(game.dragged);

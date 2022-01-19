@@ -19,7 +19,7 @@ export let addEvents  = {
         // let orice = button.addEventListener('click', () => dataHandler.createNewBoard(title))
         // console.log(orice)
         document.querySelector('.buttonAddBoard').addEventListener('click',  async() => {
-            const respone = await dataHandler.createNewBoard('test tampit');
+            const respone = await dataHandler.createNewBoard('New Board');
             if(respone.created){
               boardsManager.loadBoards()
             }

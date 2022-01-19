@@ -53,6 +53,51 @@ export let dataHandler = {
     const response = await request.json()
     return response
   },
+  updateCardName: async function (cardName, cardId) {
+    let toSend = {
+      card_name: cardName,
+      card_id: cardId,
+    }
+    const request = await fetch('/api/update/card-name', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(toSend)
+    })
+    const response = await request.json()
+    return response
+  },
+
+  updateName: async function (text, boardId) {
+    let toSend = {
+      board_name: text,
+      board_id: boardId
+    };
+    const request = await fetch('/api/update/board-name', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toSend)
+    });
+    const response = await request.json()
+    return response
+  },
+
+  updateStatusName: async function (text, boardId) {
+    let toSend = {
+      status_name: text,
+      status_id: boardId
+    };
+    const request = await fetch('/api/update/status-name', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toSend)
+    });
+    const response = await request.json()
+    return response
+  },
 
   createNewBoard: async function (boardTitle) {
     // creates new board, saves it and calls the callback function with its data
@@ -71,11 +116,7 @@ export let dataHandler = {
     console.log(response)
     return(response)
     // nu am ce face cu raspunsul, pt ca nu updatez DOM-ul cu query, ci il adaug manual
-    
-
-
-
-
+  
   },
   createNewCard: async function (cardTitle, boardId, statusId) {
     // creates new card, saves it and calls the callback function with its data
