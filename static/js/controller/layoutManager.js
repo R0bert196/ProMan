@@ -18,7 +18,8 @@ export let addEvents  = {
         // button.addEventListener('click', () => dataHandler.createNewBoard(title))
         // let orice = button.addEventListener('click', () => dataHandler.createNewBoard(title))
         // console.log(orice)
-        document.querySelector('.buttonAddBoard').addEventListener('click',  async() => {
+        document.querySelector('.buttonAddBoard').addEventListener('click',  async(e) => {
+            // e.target.parentElement.preventDefault();
             const respone = await dataHandler.createNewBoard('New Board');
             if(respone.created){
               boardsManager.loadBoards()
