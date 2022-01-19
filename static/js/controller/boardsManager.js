@@ -42,12 +42,14 @@ function transformColumnName (e){
   // e.currentTarget.preventDefault()
   e.preventDefault();
   // console.log(e.inputType)
+  if (e.target.classList.contains('board-column-title')){
   if(!e.data && e.inputType == "insertText"){
     dataHandler.updateStatusName(e.target.innerText.trim().replace(/\n/g,""), e.target.dataset.statusId);
     e.target.innerHTML = e.target.textContent.trim().replace(/\n/g,"");
     e.target.contentEditable="false"
     e.target.contentEditable="true"
   }
+}
 }
 
 
@@ -72,28 +74,29 @@ async function showHideButtonHandler  (clickEvent) {
       const content = boardBuilder(uniqueStatus);
       
       domManager.addChild(`.board-columns[data-board-id="${boardId}"]`, content);
-
+      if (clickEvent.target.parentElement.nextElementSibling.children[0].children[0].classList.contains('board-column-title')){
       domManager.addEventListener(
         `.board-columns[data-board-id="${boardId}"]`,
         'input',
         transformColumnName
       )
+      }
       console.log(clickEvent.target)
       
-      if (clickEvent.target.parentElement.nextElementSibling.children[0].children[0].classList.contains('board-column-title')){
-        console.log(clickEvent.target)
-        domManager.addEventListener(
-        clickEvent.Target,
-        'input',
-        transformTitleToForm
-        )}
+      // if (clickEvent.target.parentElement.nextElementSibling.children[0].children[0].classList.contains('board-column-title')){
+      //   console.log(clickEvent.target)
+      //   domManager.addEventListener(
+      //   clickEvent.Target,
+      //   'input',
+      //   transformTitleToForm
+      //   )}
       let uniqueCards = []
       // aici avem toate cardurile pentru boardul cu id-ul corespunzator
       // console.log(boardContent)
       boardContent.forEach( card => {
         if (card.status_id==uniqueStatus.id) {
           cardsManager.addCards(card, boardId, uniqueStatus.id)
-          if (clickEvent.target.classList.contains('card')){
+          if (clickEvent.target.parentElement.nextElementSibling.children[0].children[1].children[0].classList.contains('card')){
           domManager.addEventListener(
             `.card[data-card-id="${card.card_id}"]`,
             "input",

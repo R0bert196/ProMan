@@ -89,7 +89,7 @@ def update_status_name():
 def update_card_name():
     card=request.get_json()
     print(str(card))
-    # queires.update_card_name(card)
+    queires.update_card_name(card)
     return jsonify(True)
 
 def main():
