@@ -41,20 +41,9 @@ function deleteBoard(e) {
   dataHandler.deleteBoard(boardId)
 }
 
-// async function cheamaFunctia() {
-
-//   await boardsManager.loadBoards()
-//   cardsManager.insertCard();
-// }
-
-// cheamaFunctia()
-
-// boardsManager.loadBoards().then(cardsManager.in)
 
 function transformTitleToForm(e) {
-  // e.currentTarget.preventDefault()
   e.preventDefault();
-  // console.log(e.inputType)
   if (!e.data && e.inputType == "insertText") {
     dataHandler.updateName(
       e.target.innerText.trim().replace(/\n/g, ""),
@@ -68,9 +57,7 @@ function transformTitleToForm(e) {
 }
 
 function transformColumnName(e) {
-  // e.currentTarget.preventDefault()
   e.preventDefault();
-  // console.log(e.inputType)
   if (e.target.classList.contains("board-column-title")) {
     if (!e.data && e.inputType == "insertText") {
       dataHandler.updateStatusName(
@@ -86,9 +73,9 @@ function transformColumnName(e) {
 
 async function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
-  // console.log(clickEvent.target)
-  // console.log(boardId);
   if (clickEvent.target.classList.contains("hidden")) {
+    clickEvent.target.children[0].classList.remove('fa-chevron-down');
+    clickEvent.target.children[0].classList.add('fa-chevron-up');
     clickEvent.target.parentElement.children[1].classList.remove(
       "hiddenAddCardButton"
     );
@@ -120,21 +107,10 @@ async function showHideButtonHandler(clickEvent) {
         );
       }
       console.log(clickEvent.target);
-
-      // if (clickEvent.target.parentElement.nextElementSibling.children[0].children[0].classList.contains('board-column-title')){
-      //   console.log(clickEvent.target)
-      //   domManager.addEventListener(
-      //   clickEvent.Target,
-      //   'input',
-      //   transformTitleToForm
-      //   )}
       let uniqueCards = [];
-      // aici avem toate cardurile pentru boardul cu id-ul corespunzator
-      // console.log(boardContent)
       console.log(uniqueStatus)
       boardContent.forEach((card) => {
         if (card.status_id == uniqueStatus.id) {
-          // sa numar cati copii are
           console.log(clickEvent.target.parentElement.nextElementSibling.children.length);
           cardsManager.addCards(
             card,
@@ -155,25 +131,21 @@ async function showHideButtonHandler(clickEvent) {
           uniqueCards.push(card);
         }
       });
-      // console.log(uniqueCards)
       cardsManager.enableDragAndDrop();
     });
   } else {
+    clickEvent.target.children[0].classList.remove("fa-chevron-up");
+    clickEvent.target.children[0].classList.add("fa-chevron-down");
     clickEvent.target.classList.add("hidden");
     clickEvent.target.parentElement.children[1].classList.add(
       "hiddenAddCardButton"
     );
-    // clickEvent.t
-    // console.log('asta e next sibling')
-    // console.log(clickEvent.target.parentElement.nextElementSibling)
     clickEvent.target.parentElement.nextElementSibling.innerHTML = "";
   }
 }
 
 function transformCardName(e) {
-  // e.currentTarget.preventDefault()
   e.preventDefault();
-  // console.log(e.inputType)
   if (!e.data && e.inputType == "insertText") {
     dataHandler.updateCardName(
       e.target.innerText.trim().replace(/\n/g, ""),

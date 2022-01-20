@@ -136,7 +136,6 @@ def update_status_name():
 @app.route("/api/update/card-name", methods=["POST"])
 def update_card_name():
     card = request.get_json()
-    print(str(card))
     queires.update_card_name(card)
     return jsonify(True)
 
@@ -144,7 +143,8 @@ def update_card_name():
 @app.route("/api/insert-card", methods=["POST"])
 def insert_card():
     card = request.get_json()
-    print(str(card['board_id']))
+    first_available_column=queires.get_statuses()[0]['id']
+    card['board_id']['first_column']=first_available_column
     return jsonify(queires.create_card(card['board_id']))
     
 

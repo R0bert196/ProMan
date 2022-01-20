@@ -193,17 +193,17 @@ def create_card(card):
         """
         UPDATE cards
         SET card_order = card_order+1
-        WHERE board_id=%(board_id)s AND status_id=1;
+        WHERE board_id=%(board_id)s AND status_id=%(first_column)s;
         """,card)
     data_manager.execute_insert(
         """
         INSERT INTO cards (board_id,status_id,title,card_order)
-        VALUES (%(board_id)s,1,'New Card',1)
+        VALUES (%(board_id)s,%(first_column)s,'New Card',1)
         """, card)
     return data_manager.execute_select(
         """
         SELECT id AS card_id,title as card_title,card_order,status_id,board_id from cards
-        WHERE board_id= 1 AND status_id=1 AND card_order=1""", False)
+        WHERE board_id= 1 AND status_id=%(first_column)s AND card_order=1""", card , False)
 
 
 def create_stat():
@@ -222,7 +222,6 @@ def delete_board(board):
     )
 
 def delete_stat(stat):
-    print("se vor sterge \n"+str(data_manager.execute_select("""select * from cards WHERE status_id =%(stat_id)s""",stat)))
     data_manager.execute_insert("""
     DELETE FROM cards WHERE status_id = %(stat_id)s
      """,stat)
