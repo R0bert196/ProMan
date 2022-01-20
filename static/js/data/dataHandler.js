@@ -13,6 +13,21 @@ export let dataHandler = {
     const response = await request.json()
     // console.log(response)
     return(response)
+  },
+
+  deleteStatuses: async function (stat) {
+    let toSend = {
+      stat,
+    };
+    const request = await fetch(`/api/delete-stat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toSend),
+    });
+    const response = await request.json();
+    return response;
   }
   ,
   getBoardContent: async function (boardId) {

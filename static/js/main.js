@@ -7,8 +7,8 @@ async function init() {
   await boardsManager.loadBoards();
   // addEvents.createBoard();
   addEvents.createBoard();
-  addEvents.createStatus()
-  
+  addEvents.createStatus();
+  addEvents.deleteStatuses();
 }
 
 init();

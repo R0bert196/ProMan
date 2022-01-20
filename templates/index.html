@@ -33,6 +33,9 @@
                   <li class="nav-item">
                     <div class="buttonAddColumn mx-2">Add New Column</div>
                   </li>
+                  <li class="nav-item">
+                    <div class="buttonDeleteColumn mx-2">Delete Column</div>
+                  </li>
                   
                 {% if not session['profile'] %}
                   <li class="nav-item">
@@ -48,6 +51,20 @@
             </div>
           </nav>
         <!-- era numit id='root', probabil ar ttrebui sa modificam si in JS querySelectorul-->
+        <div class="popup-wrapper">
+          <div class="popup">
+
+              <div id='popup-x'>x</div>
+              <div class="popup-content">
+                  <ul class='statuses list-group'>
+
+                  </ul>
+              </div>
+              <div id='popup-close' class="btn btn-secondary mt-3">Close</div>
+
+          </div>
+        
+       </div>
         
         <div class="board-container"></div>
 

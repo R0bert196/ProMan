@@ -2,6 +2,7 @@ export const htmlTemplates = {
     board: 1,
     card: 2,
     status: 3,
+    
 }
 
 export function htmlFactory(template) {

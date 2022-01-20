@@ -215,5 +215,5 @@ def create_stat():
 
 def delete_stat(stat):
     data_manager.execute_insert(
-        """ DELETE FROM statuses WHERE id = %(id)s""" , stat
+        """ DELETE FROM statuses WHERE id = %(stat_id)s""" , stat
     )

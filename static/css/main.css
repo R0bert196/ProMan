@@ -2,7 +2,7 @@
     background-color: green;
 }
 
-.buttonAddBoard, .buttonAddColumn {
+.buttonAddBoard, .buttonAddColumn, .buttonDeleteColumn {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -153,4 +153,61 @@ button{
 
 .hiddenAddCardButton {
     display: none;
+}
+
+.popup-wrapper{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.popup{
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 9;
+    text-align: center;
+    width: 70%;
+    margin: 7% auto;
+    padding: 20px;
+    background: white;
+    position: relative;
+}
+
+#popup-x{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    color: crimson;
+    cursor: pointer;
+}
+#popup-close{
+    position: absolute;
+    bottom: 0px;
+    right: 8px;
+    cursor: pointer;
+}
+
+
+.statuses > li {
+    cursor: pointer;
+    display: inline;
+    padding: 0.7em 1em 0.7em 1em;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    margin-right:30px;
+    background-color: #4180dd;
+
+}
+
+.statuses > li:hover {
+    color: aqua;
+    text-decoration: underline;
+    
+}
+
+.statuses {
+    list-style: none;
 }

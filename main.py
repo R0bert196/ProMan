@@ -155,9 +155,9 @@ def create_stat():
 
 @app.route("/api/delete-stat",methods=["POST"])
 def delete_stat():
-    card = request.get_json()
-    print(str(card))
-    # queires.delete_stat(card)
+    sent_info = request.get_json()
+    queires.delete_stat(sent_info['stat'])
+    return jsonify(True)
 
 def main():
     app.run(debug=True)
