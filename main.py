@@ -159,6 +159,13 @@ def delete_stat():
     queires.delete_stat(sent_info['stat'])
     return jsonify(True)
 
+@app.route("/api/delete-board",methods=["POST"])
+def delete_board():
+    sent_info = request.get_json()
+    print("informatii primte :   ",sent_info)
+    queires.delete_board(sent_info)
+    return jsonify(True)
+
 def main():
     app.run(debug=True)
 

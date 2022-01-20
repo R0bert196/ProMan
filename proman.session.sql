@@ -1,5 +1,5 @@
 -- SELECT * FROM cards where id = 13;
--- SELECT * FROM statuses;
+SELECT * FROM cards;
 
 -- INSERT INTO statuses (title)
 --         VALUES ('New Status')

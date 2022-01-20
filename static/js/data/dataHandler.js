@@ -15,6 +15,21 @@ export let dataHandler = {
     return(response)
   },
 
+  deleteBoard: async function (boardId) {
+let toSend = {
+      board_id: boardId
+    };
+    const request = await fetch(`/api/delete-board`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toSend),
+    });
+    const response = await request.json();
+    return response;
+  },
+
   deleteStatuses: async function (stat) {
     let toSend = {
       stat,

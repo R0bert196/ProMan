@@ -57,8 +57,11 @@ export let addEvents = {
     });
     console.log(ul.children);
     Array.from(ul.children).forEach((child) => {
-      child.addEventListener("click", () =>
+      child.addEventListener("click", () => {
+        popup.style.display = 'none';
+        location.reload();
         dataHandler.deleteStatuses({ stat_id: child.dataset.statusId })
+      }
       );
     });
   },
@@ -70,5 +73,3 @@ buttonDeleteColumn.addEventListener("click", () => {
     : (popup.style.display = "block");
 });
 
-// cream query pt introducerea in baza de date
-// actualizam domul cu noul board

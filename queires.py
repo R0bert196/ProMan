@@ -213,7 +213,19 @@ def create_stat():
     )
 
 
+def delete_board(board):
+    data_manager.execute_insert("""
+    DELETE FROM cards WHERE board_id = %(board_id)s
+     """,board)
+    data_manager.execute_insert(
+        """ DELETE FROM boards WHERE id = %(board_id)s""",board
+    )
+
 def delete_stat(stat):
+    print("se vor sterge \n"+str(data_manager.execute_select("""select * from cards WHERE status_id =%(stat_id)s""",stat)))
+    data_manager.execute_insert("""
+    DELETE FROM cards WHERE status_id = %(stat_id)s
+     """,stat)
     data_manager.execute_insert(
         """ DELETE FROM statuses WHERE id = %(stat_id)s""" , stat
     )
