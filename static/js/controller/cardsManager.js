@@ -178,6 +178,10 @@ const initDropZone = () => {
 };
 
 const handleDragStart = (e) => {
+  console.log(
+    "aici e dragstart",
+    e.target.parentElement.parentElement.parentElement.dataset.boardId
+  );
   ui.dragged = e.currentTarget;
   console.log(ui.dragged);
   ui.dragged.children[1].contentEditable = "false";
@@ -187,7 +191,8 @@ const handleDragStart = (e) => {
   //addHighlight
 };
 
-const handleDragEnd = () => {
+const handleDragEnd = (e) => {
+  console.log("aici e dragend", e.target.parentElement.parentElement.parentElement.dataset.boardId);
   console.log("Drag end of", ui.dragged);
   ui.dragged.children[1].contentEditable = "true";
   ui.dragged.classList.remove("curr-dragging");

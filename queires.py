@@ -117,35 +117,29 @@ def get_statuses():
     )
 
 def update_card(card_details):
-    
+    # Steps : 1. capture original board and position
+    # 2. decrease position of elements in original table  
+    # 3. increase position of elements in final table
+    # 4. insert element in new table  
     old_details = data_manager.execute_select("""
     SELECT id,board_id as old_board,card_order as old_order,status_id as old_status FROM cards
     WHERE id=%(card_id)s
     """, card_details, False)
-    # print()
+
     data_manager.execute_insert(
         """
         UPDATE cards
         SET card_order = card_order-1
         WHERE card_order > %(old_order)s AND board_id=%(old_board)s AND status_id = %(old_status)s;
         """, old_details)
-    # fac loc pentru card in noua coloana crescand valoarea cardurilor cu ordine mai mare decat noua pozitie primita de la Robert 
-    print('voi creste ordinea elementelor : ')
-    print(str(data_manager.execute_select("""
-    select * from cards
-    WHERE card_order >= %(card_order)s AND board_id=%(board_id)s AND status_id=%(status_id)s
-    """,card_details)
-    ))
-    print('---------')
+
     data_manager.execute_insert(
         """
         UPDATE cards
         SET card_order = card_order+1
         WHERE card_order >= %(card_order)s AND board_id=%(board_id)s AND status_id=%(status_id)s;
         """,card_details)
-    
-    # introduc cardul in baza de date pe noua pozitie
-    
+        
     data_manager.execute_insert(
         """
         UPDATE cards    
@@ -155,6 +149,7 @@ def update_card(card_details):
         WHERE cards.id = %(card_id)s;
         """, card_details)
   
+
 def update_board_name(board_details):
     data_manager.execute_insert(
         """
@@ -198,7 +193,7 @@ def create_card(card):
         """
         UPDATE cards
         SET card_order = card_order+1
-        WHERE board_id=%(board_id)s;
+        WHERE board_id=%(board_id)s AND status_id=1;
         """,card)
     data_manager.execute_insert(
         """
