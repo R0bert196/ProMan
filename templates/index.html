@@ -41,12 +41,12 @@
                   <li class="nav-item">
                     <a class="nav-link mx-2" href="{{ url_for('login') }}">Login</a>
                   </li>
-                  {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link mx-2" href="{{ url_for('logout') }}">Logout</a>
-                  </li>
-                  {%endif%}
                 </ul>
+                  {% else %}
+                </ul>
+                <span class='navbar-text'>{{ session['profile']['name'] }}</span>
+                <a class="nav-link mx-2" href="{{ url_for('logout') }}">Logout</a>
+                {%endif%}
               </div>
             </div>
           </nav>
