@@ -143,11 +143,26 @@ export let dataHandler = {
       body: JSON.stringify(toSend)
     });
     const response = await request.json()
-    console.log(response)
     return(response)
     // nu am ce face cu raspunsul, pt ca nu updatez DOM-ul cu query, ci il adaug manual
   
   },
+
+  createNewStatus: async function () {
+    
+    // container.innerHTML = "";
+    
+    const request = await fetch("/api/create-stat", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    const response = await request.json();
+    return response;
+
+  },
+
   createNewCard: async function (cardTitle, boardId, statusId) {
     // creates new card, saves it and calls the callback function with its data
   },

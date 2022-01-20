@@ -204,3 +204,16 @@ def create_card(card):
         """
         SELECT id AS card_id,title as card_title,card_order,status_id,board_id from cards
         WHERE board_id= 1 AND status_id=1 AND card_order=1""", False)
+
+
+def create_stat():
+    data_manager.execute_insert(
+        """ INSERT INTO statuses (title)
+        VALUES ('New Status') """
+    )
+
+
+def delete_stat(stat):
+    data_manager.execute_insert(
+        """ DELETE FROM statuses WHERE id = %(id)s""" , stat
+    )

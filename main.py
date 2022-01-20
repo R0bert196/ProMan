@@ -143,12 +143,21 @@ def update_card_name():
 
 @app.route("/api/insert-card", methods=["POST"])
 def insert_card():
-
     card = request.get_json()
     print(str(card['board_id']))
     return jsonify(queires.create_card(card['board_id']))
     
 
+@app.route("/api/create-stat",methods=["POST"])
+def create_stat():
+    queires.create_stat()
+    return jsonify(True)
+
+@app.route("/api/delete-stat",methods=["POST"])
+def delete_stat():
+    card = request.get_json()
+    print(str(card))
+    # queires.delete_stat(card)
 
 def main():
     app.run(debug=True)
@@ -159,7 +168,6 @@ def main():
             "/favicon.ico",
             redirect_to=url_for("static", filename="favicon/favicon.ico"),
         )
-
 
 @app.route("/login")
 def login():

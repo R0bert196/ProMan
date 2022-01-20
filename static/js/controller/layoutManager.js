@@ -31,7 +31,15 @@ export let addEvents  = {
         // domManager.addChild(content);
         
 
-    }
+  },
+  createStatus: async function () {
+    document.querySelector(".buttonAddColumn").addEventListener('click', async (e) => {
+      const respone = await dataHandler.createNewStatus();
+      if (respone.created) {
+        boardsManager.loadBoards();
+      }
+    });
+  }
 };
 
 

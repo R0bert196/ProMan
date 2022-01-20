@@ -1,6 +1,11 @@
 -- SELECT * FROM cards where id = 13;
 -- SELECT * FROM statuses;
 
+-- INSERT INTO statuses (title)
+--         VALUES ('New Status')
+
+
+
 -- delete from boards where id>3
 -- SELECT board_id as old_board,card_order as old_order FROM cards
 -- where id=1
@@ -27,4 +32,4 @@
 --     name VARCHAR(256) NOT NULL
 -- )
 
-SELECT * FROM cards
+-- SELECT * FROM cards
