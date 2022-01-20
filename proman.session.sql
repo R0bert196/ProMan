@@ -2,7 +2,8 @@
 -- SELECT * FROM statuses;
 
 -- delete from boards where id>3
-SELECT * FROM cards
+-- SELECT board_id as old_board,card_order as old_order FROM cards
+-- where id=1
 
 -- update  cards
 -- set board_id = 1,
@@ -26,4 +27,4 @@ SELECT * FROM cards
 --     name VARCHAR(256) NOT NULL
 -- )
 
--- SELECT * FROM cards
+SELECT * FROM cards

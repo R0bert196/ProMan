@@ -52,7 +52,7 @@ export let cardsManager = {
   },
 };
 
-function addCard(e) {
+async function addCard(e) {
   //asta trimit spre backend sa faca query
   const boardId = e.target.dataset.boardId;
   let cardOrder =
@@ -60,35 +60,33 @@ function addCard(e) {
       .length + 1;
   let container =
     e.target.parentElement.nextElementSibling.children[0].children[1];
-  
-  
-  
-  let card = {
-    board_id: boardId,
-    card_order: cardOrder,
-    card_title: "New Card",
-    status_id: 1,
-    card_id: 99,
-  };
+
+  // let card = {
+  //   board_id: boardId,
+  //   // card_order: cardOrder,
+  //   // card_title: "New Card",
+  //   // status_id: 1,
+  //   // card_id: Date.now(),
+  // };
   // add to db
-  dataHandler.insertCard(card);
+  let cardDetailes = await dataHandler.insertCard({ board_id: boardId });
+  console.log(cardDetailes[0]);
 
   // (%(board_id)s,%(status_id)s,%(card_title)s,%(card_order)s)
   // console.log(cardOrder, boardId)
-  addCardToDOM(card, container);
+  addCardToDOM(cardDetailes[0], container);
 
   // console.log(e.target);
 }
 
 function addCardToDOM(card, container) {
-  
   const cardBuilder = htmlFactory(htmlTemplates.card);
   const content = cardBuilder(card);
-  container.innerHTML += content
-  cardsManager.enableDragAndDrop()
+  container.innerHTML = content + container.innerHTML;
+  cardsManager.enableDragAndDrop();
   // adaug event listener de input si pe cardul nou creat
   console.log(container.lastChild);
-  container.lastChild.addEventListener("input", transformCardName);
+  container.children[0].addEventListener("input", transformCardName);
 }
 
 function selectOrder(dragged, parent) {
@@ -104,10 +102,12 @@ function selectOrder(dragged, parent) {
   return curentCount;
 }
 
-
+// SET board_id = %(board_id)s,
+// card_order = %(card_order)s,
+// status_id = %(status_id)s
+// WHERE cards.id = %(card_id)s;
 
 function transformCardName(e) {
-
   // e.currentTarget.preventDefault()
   e.preventDefault();
   // console.log(e.inputType)
@@ -121,10 +121,6 @@ function transformCardName(e) {
     e.target.contentEditable = "true";
   }
 }
-
-
-
-
 
 function deleteButtonHandler(clickEvent) {}
 

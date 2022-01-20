@@ -96,8 +96,6 @@ def get_board_details(board_id):
     ON cards.status_id=statuses.id
     WHERE boards.id = %(board_id)s
     ORDER BY boards.title ASC, statuses.id ASC, cards.card_order ASC
-
-
     """,
     variables={'board_id': board_id}
     )
@@ -112,16 +110,36 @@ def get_statuses():
 
 def update_card(card_details):
     
+    old_details = data_manager.execute_select("""
+    SELECT id,board_id as old_board,card_order as old_order,status_id as old_status FROM cards
+    WHERE id=%(card_id)s
+    """, card_details, False)
+    data_manager.execute_insert(
+        """
+        UPDATE cards
+        SET card_order = card_order-1
+        WHERE card_order > %(old_order)s AND board_id=%(old_board)s AND status_id = %(old_status)s;
+        """, old_details)
+    # fac loc pentru card in noua coloana crescand valoarea cardurilor cu ordine mai mare decat noua pozitie primita de la Robert 
+    print('voi creste ordinea elementelor : ')
+    print(str(data_manager.execute_select("""
+    select * from cards
+    WHERE card_order >= %(card_order)s AND board_id=%(board_id)s AND status_id=%(status_id)s
+    """,card_details)
+    ))
+    print('---------')
     data_manager.execute_insert(
         """
         UPDATE cards
         SET card_order = card_order+1
-        WHERE card_order >= %(card_order)s AND board_id=%(board_id)s;
+        WHERE card_order >= %(card_order)s AND board_id=%(board_id)s AND status_id=%(status_id)s;
         """,card_details)
-
+    
+    # introduc cardul in baza de date pe noua pozitie
+    
     data_manager.execute_insert(
         """
-        UPDATE cards
+        UPDATE cards    
         SET board_id = %(board_id)s,
         card_order = %(card_order)s,
         status_id = %(status_id)s
@@ -169,6 +187,16 @@ def add_user(user):
 def create_card(card):
     data_manager.execute_insert(
         """
+        UPDATE cards
+        SET card_order = card_order+1
+        WHERE board_id=%(board_id)s;
+        """,card)
+    data_manager.execute_insert(
+        """
         INSERT INTO cards (board_id,status_id,title,card_order)
-        VALUES (%(board_id)s,%(status_id)s,%(card_title)s,%(card_order)s)
+        VALUES (%(board_id)s,1,'New Card',1)
         """, card)
+    return data_manager.execute_select(
+        """
+        SELECT id AS card_id,title as card_title,card_order,status_id,board_id from cards
+        WHERE board_id= 1 AND status_id=1 AND card_order=1""", False)

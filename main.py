@@ -105,6 +105,7 @@ def get_status_content():
 @app.route("/api/update/card", methods=["POST"])
 def update_card():
     card_id = request.get_json()
+    print(str(card_id))
     queires.update_card(card_id["card"])
     return jsonify(True)
 
@@ -132,12 +133,13 @@ def update_card_name():
     return jsonify(True)
 
 
-@app.route("/api/isnert-card", methods=["POST"])
+@app.route("/api/insert-card", methods=["POST"])
 def insert_card():
+
     card = request.get_json()
-    print(str(card))
-    queires.create_card(card['card'])
-    return jsonify(True)
+    print(str(card['board_id']))
+    return jsonify(queires.create_card(card['board_id']))
+    
 
 
 def main():

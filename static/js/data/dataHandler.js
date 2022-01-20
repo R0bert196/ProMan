@@ -67,11 +67,11 @@ export let dataHandler = {
     return response
   },
 
-  insertCard: async function (card) {
+  insertCard: async function (board_id) {
     let toSend = {
-      card
+      board_id,
     };
-    const request = await fetch("/api/isnert-card", {
+    const request = await fetch("/api/insert-card", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
