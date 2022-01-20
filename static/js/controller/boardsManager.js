@@ -23,8 +23,24 @@ export let boardsManager = {
         transformTitleToForm
       )
     }
-  },
+    cardsManager.insertCard();
+  }
+  
+  
+  
 };
+
+// async function cheamaFunctia() {
+
+//   await boardsManager.loadBoards()
+//   cardsManager.insertCard();
+// }
+
+// cheamaFunctia()
+
+
+// boardsManager.loadBoards().then(cardsManager.in)
+
 
 function transformTitleToForm (e){
   // e.currentTarget.preventDefault()
@@ -60,6 +76,7 @@ async function showHideButtonHandler  (clickEvent) {
   // console.log(clickEvent.target)
   // console.log(boardId);
   if (clickEvent.target.classList.contains('hidden')) {
+    clickEvent.target.parentElement.children[1].classList.remove("hiddenAddCardButton");
     clickEvent.target.parentElement.nextElementSibling.innerHTML = 'Loading...'
     clickEvent.target.classList.remove('hidden');
     const uniqueStatuses = await dataHandler.getStatuses()
@@ -113,6 +130,10 @@ async function showHideButtonHandler  (clickEvent) {
   }
   else{
     clickEvent.target.classList.add('hidden');
+    clickEvent.target.parentElement.children[1].classList.add(
+      "hiddenAddCardButton"
+    );
+    // clickEvent.t
     // console.log('asta e next sibling')
     // console.log(clickEvent.target.parentElement.nextElementSibling)
     clickEvent.target.parentElement.nextElementSibling.innerHTML = ''

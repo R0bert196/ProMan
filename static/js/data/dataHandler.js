@@ -67,6 +67,21 @@ export let dataHandler = {
     return response
   },
 
+  insertCard: async function (card) {
+    let toSend = {
+      card
+    };
+    const request = await fetch("/api/isnert-card", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toSend),
+    });
+    const response = await request.json();
+    return response;
+  },
+
   updateName: async function (text, boardId) {
     let toSend = {
       board_name: text,

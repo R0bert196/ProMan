@@ -152,3 +152,23 @@ def update_card_name(card_details):
         WHERE id = %(card_id)s;
         """, card_details)
 
+def check_user_existence(user):
+    return data_manager.execute_select(
+        """
+        SELECT * from users
+        WHERE id = %(id)s
+        """, user)
+
+def add_user(user):
+    data_manager.execute_insert(
+        """
+        INSERT INTO users (id,name)
+        VALUES (%(id)s, %(name)s)
+        """, user)
+
+def create_card(card):
+    data_manager.execute_insert(
+        """
+        INSERT INTO cards (board_id,status_id,title,card_order)
+        VALUES (%(board_id)s,%(status_id)s,%(card_title)s,%(card_order)s)
+        """, card)

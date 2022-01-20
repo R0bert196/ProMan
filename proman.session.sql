@@ -1,7 +1,8 @@
-SELECT * FROM cards;
+-- SELECT * FROM cards;
 -- SELECT * FROM statuses;
 
--- SELECT * FROM boards
+-- delete from boards where id>3
+SELECT * FROM cards
 
 -- update  cards
 -- set board_id = 1,
@@ -17,3 +18,12 @@ SELECT * FROM cards;
 -- ON cards.status_id=statuses.id
 -- WHERE boards.id = 2
 -- ORDER BY boards.title ASC, statuses.id ASC, cards.card_order ASC
+
+
+-- DROP TABLE users;
+-- CREATE TABLE users (
+--     id VARCHAR(50) PRIMARY key not NULL,
+--     name VARCHAR(256) NOT NULL
+-- )
+
+-- SELECT * FROM cards

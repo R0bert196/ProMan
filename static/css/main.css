@@ -150,3 +150,7 @@ section.board{
 button{
     cursor: pointer;
 }
+
+.hiddenAddCardButton {
+    display: none;
+}
