@@ -18,6 +18,14 @@ def get_card_status(status_id):
     return status
 
 
+def delete_card(card_id):
+    return data_manager.execute_insert(
+        """
+        DELETE FROM cards WHERE id = %(card_id)s;
+
+        """, card_id)
+
+
 def get_boards():
     """
     Gather all boards

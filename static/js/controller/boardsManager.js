@@ -24,6 +24,7 @@ export let boardsManager = {
       )
     }
     cardsManager.insertCard();
+    cardsManager.delteCard();
   }
   
   

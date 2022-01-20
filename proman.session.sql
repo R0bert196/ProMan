@@ -1,4 +1,4 @@
--- SELECT * FROM cards;
+SELECT * FROM cards where id = 13;
 -- SELECT * FROM statuses;
 
 -- delete from boards where id>3

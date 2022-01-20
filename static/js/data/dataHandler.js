@@ -113,6 +113,21 @@ export let dataHandler = {
     const response = await request.json()
     return response
   },
+  deletecardFromDB: async function (cardId) {
+    let toSend = {
+      card_id: cardId,
+    };
+    const request = await fetch("/api/card/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toSend),
+    });
+    const response = await request.json();
+    return response;
+
+  },
 
   createNewBoard: async function (boardTitle) {
     // creates new board, saves it and calls the callback function with its data

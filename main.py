@@ -117,6 +117,14 @@ def update_board_name():
     return jsonify(True)
 
 
+@app.route('/api/card/delete', methods=['POST'])
+def delete_card():
+    card_id = request.get_json()
+    print(card_id)
+    queires.delete_card(card_id)
+    return jsonify(True)
+
+
 @app.route("/api/update/status-name", methods=["POST"])
 def update_status_name():
     status = request.get_json()

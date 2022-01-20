@@ -50,7 +50,26 @@ export let cardsManager = {
       button.addEventListener("click", addCard);
     });
   },
+  delteCard: async function () {
+    const cardContainers = document.querySelectorAll(".board-columns");
+    cardContainers.forEach(container => {
+      container.addEventListener('click', deleteCard)
+    })
+
+
+  },
 };
+
+function deleteCard(e) {
+  if (e.target.classList.contains("fa-trash-alt")) {
+    console.log("card", e.target.parentElement.parentElement);
+    // deleteCardFromDom(e.target.parentElement.parentElement);
+    e.target.parentElement.parentElement.remove()
+    dataHandler.deletecardFromDB(e.target.parentElement.parentElement.dataset.cardId);
+
+  }
+}
+
 
 async function addCard(e) {
   //asta trimit spre backend sa faca query
