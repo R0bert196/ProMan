@@ -66,6 +66,7 @@ function deleteCard(e) {
     // deleteCardFromDom(e.target.parentElement.parentElement);
     e.target.parentElement.parentElement.remove()
     dataHandler.deletecardFromDB(e.target.parentElement.parentElement.dataset.cardId);
+    // document.querySelector(".buttonAddBoard").click()
 
   }
 }
@@ -93,7 +94,10 @@ async function addCard(e) {
 
   // (%(board_id)s,%(status_id)s,%(card_title)s,%(card_order)s)
   // console.log(cardOrder, boardId)
-  addCardToDOM(cardDetailes[0], container);
+  // querySelector(".board-toggle['");
+  document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).click();
+  document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).click();
+  // addCardToDOM(cardDetailes[0], container);
 
   // console.log(e.target);
 }

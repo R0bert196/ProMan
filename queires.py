@@ -122,6 +122,7 @@ def update_card(card_details):
     SELECT id,board_id as old_board,card_order as old_order,status_id as old_status FROM cards
     WHERE id=%(card_id)s
     """, card_details, False)
+    # print()
     data_manager.execute_insert(
         """
         UPDATE cards
