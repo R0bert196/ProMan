@@ -3,7 +3,7 @@ export let domManager = {
     const parent = document.querySelector(parentIdentifier);
     if (parent) {
       parent.insertAdjacentHTML("beforeend", childContent);
-    } else {
+    } else {  
       console.error("could not find such html element: " + parentIdentifier);
     }
   },
@@ -15,4 +15,10 @@ export let domManager = {
       console.error("could not find such html element: " + parentIdentifier);
     }
   },
+  querySelector(item) {
+    return document.querySelector(item);
+  },
+  addCardToBoard(boardId) {
+    const board = 'da'
+  }
 };
