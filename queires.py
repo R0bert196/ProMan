@@ -177,6 +177,7 @@ def update_card_name(card_details):
 def check_user_existence(user):
     return data_manager.execute_select(
         """
+
         SELECT * from users
         WHERE id = %(id)s
         """, user)

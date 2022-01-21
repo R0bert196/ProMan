@@ -21,6 +21,12 @@ DROP TABLE IF EXISTS statuses CASCADE;
 DROP TABLE IF EXISTS boards CASCADE;
 DROP TABLE IF EXISTS cards;
 
+DROP TABLE if exists users;
+CREATE TABLE users (
+    id VARCHAR(50) PRIMARY key not NULL,
+    name VARCHAR(256) NOT NULL
+)
+
 ---
 --- create tables
 ---
