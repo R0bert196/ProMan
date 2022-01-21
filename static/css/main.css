@@ -211,3 +211,10 @@ button{
 .statuses {
     list-style: none;
 }
+
+
+#title{
+    margin: 5px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+}
