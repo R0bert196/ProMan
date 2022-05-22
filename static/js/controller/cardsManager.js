@@ -52,64 +52,30 @@ export let cardsManager = {
   },
   delteCard: async function () {
     const cardContainers = document.querySelectorAll(".board-columns");
-    cardContainers.forEach(container => {
-      container.addEventListener('click', deleteCard)
-    })
-
-
+    cardContainers.forEach((container) => {
+      container.addEventListener("click", deleteCard);
+    });
   },
 };
 
 function deleteCard(e) {
   if (e.target.classList.contains("fa-trash-alt")) {
     console.log("card", e.target.parentElement.parentElement);
-    // deleteCardFromDom(e.target.parentElement.parentElement);
-    e.target.parentElement.parentElement.remove()
-    dataHandler.deletecardFromDB(e.target.parentElement.parentElement.dataset.cardId);
-    // document.querySelector(".buttonAddBoard").click()
-
+    e.target.parentElement.parentElement.remove();
+    dataHandler.deletecardFromDB(
+      e.target.parentElement.parentElement.dataset.cardId
+    );
   }
 }
 
-
 async function addCard(e) {
-  //asta trimit spre backend sa faca query
   const boardId = e.target.dataset.boardId;
-  let cardOrder =
-    e.target.parentElement.nextElementSibling.children[0].children[1].children
-      .length + 1;
-  let container =
-    e.target.parentElement.nextElementSibling.children[0].children[1];
 
-  // let card = {
-  //   board_id: boardId,
-  //   // card_order: cardOrder,
-  //   // card_title: "New Card",
-  //   // status_id: 1,
-  //   // card_id: Date.now(),
-  // };
-  // add to db
   let cardDetailes = await dataHandler.insertCard({ board_id: boardId });
   console.log(cardDetailes[0]);
 
-  // (%(board_id)s,%(status_id)s,%(card_title)s,%(card_order)s)
-  // console.log(cardOrder, boardId)
-  // querySelector(".board-toggle['");
   document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).click();
   document.querySelector(`.board-toggle[data-board-id="${boardId}"]`).click();
-  // addCardToDOM(cardDetailes[0], container);
-
-  // console.log(e.target);
-}
-
-function addCardToDOM(card, container) {
-  const cardBuilder = htmlFactory(htmlTemplates.card);
-  const content = cardBuilder(card);
-  container.innerHTML = content + container.innerHTML;
-  cardsManager.enableDragAndDrop();
-  // adaug event listener de input si pe cardul nou creat
-  console.log(container.lastChild);
-  container.children[0].addEventListener("input", transformCardName);
 }
 
 function selectOrder(dragged, parent) {
@@ -125,33 +91,12 @@ function selectOrder(dragged, parent) {
   return curentCount;
 }
 
-// SET board_id = %(board_id)s,
-// card_order = %(card_order)s,
-// status_id = %(status_id)s
-// WHERE cards.id = %(card_id)s;
-
-function transformCardName(e) {
-  // e.currentTarget.preventDefault()
-  e.preventDefault();
-  // console.log(e.inputType)
-  if (!e.data && e.inputType == "insertText") {
-    dataHandler.updateCardName(
-      e.target.innerText.trim().replace(/\n/g, ""),
-      e.target.dataset.cardId
-    );
-    e.target.innerHTML = e.target.textContent.trim().replace(/\n/g, "");
-    e.target.contentEditable = "false";
-    e.target.contentEditable = "true";
-  }
-}
-
 function deleteButtonHandler(clickEvent) {}
 
 const initElements = () => {
   ui.cards = document.querySelectorAll(".card");
   ui.slots = document.querySelectorAll(".board-column-content");
 
-  // da clasa draggable ca fiind true pentru carduri
   ui.cards.forEach((card) => {
     card.setAttribute("draggable", true);
   });
@@ -171,9 +116,6 @@ const initDropZone = () => {
     slot.addEventListener("dragover", handleDragOver);
     slot.addEventListener("dragleave", handleDragLeave);
     slot.addEventListener("drop", handleDrop);
-    // ui.cards.forEach(card => {
-    //     card.addEventListener('drop', handleDrop)
-    // })
   });
 };
 
@@ -187,17 +129,17 @@ const handleDragStart = (e) => {
   ui.dragged.children[1].contentEditable = "false";
   ui.dragged.classList.add("curr-dragging");
   console.log("Drag start of", ui.dragged);
-  //sa adaug functie sa highlightuiesc sloturile disponibile
-  //addHighlight
 };
 
 const handleDragEnd = (e) => {
-  console.log("aici e dragend", e.target.parentElement.parentElement.parentElement.dataset.boardId);
+  console.log(
+    "aici e dragend",
+    e.target.parentElement.parentElement.parentElement.dataset.boardId
+  );
   console.log("Drag end of", ui.dragged);
   ui.dragged.children[1].contentEditable = "true";
   ui.dragged.classList.remove("curr-dragging");
   ui.dragged = null;
-  // removeHighlightCardSlots(game.dragged);
 };
 
 const handleDragOver = (e) => {
@@ -210,7 +152,6 @@ const handleDragEnter = (e) => {
 
 const handleDragLeave = (e) => {
   console.log("Drag leave of", e.currentTarget);
-  // removeEnterSlots(e.currentTarget);
 };
 
 const handleDrop = (e) => {
@@ -222,7 +163,6 @@ const handleDrop = (e) => {
   console.log("Drop of", dropzone);
   const afterElement = getDragAfterElement(dropzone, e.clientY);
   console.log(afterElement);
-  const draggable = document.querySelector(".curr-dragging");
 
   if (!afterElement) {
     dropzone.appendChild(ui.dragged);
@@ -230,10 +170,6 @@ const handleDrop = (e) => {
     dropzone.insertBefore(ui.dragged, afterElement);
   }
 
-  // console.log(ui.dragged.parentElement)
-  // let order = selectOrder(ui.dragged, ui.dragged.parentElement);
-  // console.log(order);
-  // console.log('detaliile elementului carat' , ui.dragged.dataset.cardId);
   newCardProperties.card_id = ui.dragged.children[1].dataset.cardId;
   newCardProperties.board_id =
     ui.dragged.parentElement.parentElement.parentElement.dataset.boardId;
@@ -242,14 +178,9 @@ const handleDrop = (e) => {
     ui.dragged,
     ui.dragged.parentElement
   );
-  // console.log('card_id' + ui.dragged.children[1].dataset.cardId)
-  // console.log('board_id' + ui.dragged.parentElement.parentElement.parentElement.dataset.boardId)
-  // console.log('status_id' + ui.dragged.parentElement.dataset.statusId)
   console.log("Values to be sent final check : ", newCardProperties);
   dataHandler.updateCard(newCardProperties);
 
-  // dropzone.parentNode.insertBefore(ui.dragged, dropzone);
-  // e.currentTarget.parentNode.insertBefore(ui.dragged, e.currentTarget);
   function getDragAfterElement(container, y) {
     const draggableElements = [
       ...container.querySelectorAll(".card:not(.curr-dragging)"),
@@ -261,11 +192,9 @@ const handleDrop = (e) => {
         const offset = y - box.top - box.height / 2;
         console.log(offset);
         if (offset < 0 && offset > closest.offset) {
-          // console.log('daca il pun in jumatatea de JOS noua valoare a elementului carat ar trebui sa fie',child.dataset.cardOrder)
           newCardProperties.card_order = parseInt(child.dataset.cardOrder);
           return { offset: offset, element: child };
         } else {
-          // console.log('daca il pun in jumatatea de JOS noua valoare a elementului carat ar trebui sa fie',parseInt(child.dataset.cardOrder)+1)
           newCardProperties.card_order = parseInt(child.dataset.cardOrder) + 1;
           return closest;
         }
@@ -274,5 +203,3 @@ const handleDrop = (e) => {
     ).element;
   }
 };
-
-

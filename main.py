@@ -4,9 +4,7 @@ from datetime import timedelta
 import os
 from authlib.integrations.flask_client import OAuth
 
-from auth_decorator import login_required
 
-from util import json_response
 import mimetypes
 import queires
 
@@ -38,22 +36,15 @@ def index():
     """
     This is a one-pager which shows all the boards and cards
     """
-    # email = dict(session)['profile']['email']
-    # print(email)
     if session.get("profile"):
-        print(dict(session).get("profile")["name"])
-        # name = dict(session).get("profile")["name"]
-        # id = dict(session).get("profile")["id"]
-        # daca e in DB nu il adaugam: contiune
-        print(queires.check_user_existence(session.get('profile')))
-        if not queires.check_user_existence(session.get('profile')):
-            queires.add_user(session.get('profile'))
+        print(queires.check_user_existence(session.get("profile")))
+        if not queires.check_user_existence(session.get("profile")):
+            queires.add_user(session.get("profile"))
     boards = queires.get_boards()
     return render_template("index.html", boards=boards)
 
 
 @app.route("/api/boards")
-# @json_response
 def get_boards():
     """
     All the boards
@@ -62,7 +53,6 @@ def get_boards():
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
-# @json_response
 def get_cards_for_board(board_id: int):
     """
     All cards that belongs to a board
@@ -117,7 +107,7 @@ def update_board_name():
     return jsonify(True)
 
 
-@app.route('/api/card/delete', methods=['POST'])
+@app.route("/api/card/delete", methods=["POST"])
 def delete_card():
     card_id = request.get_json()
     print(card_id)
@@ -143,28 +133,31 @@ def update_card_name():
 @app.route("/api/insert-card", methods=["POST"])
 def insert_card():
     card = request.get_json()
-    first_available_column=queires.get_statuses()[0]['id']
-    card['board_id']['first_column']=first_available_column
-    return jsonify(queires.create_card(card['board_id']))
-    
+    first_available_column = queires.get_statuses()[0]["id"]
+    card["board_id"]["first_column"] = first_available_column
+    return jsonify(queires.create_card(card["board_id"]))
 
-@app.route("/api/create-stat",methods=["POST"])
+
+@app.route("/api/create-stat", methods=["POST"])
 def create_stat():
     queires.create_stat()
     return jsonify(True)
 
-@app.route("/api/delete-stat",methods=["POST"])
+
+@app.route("/api/delete-stat", methods=["POST"])
 def delete_stat():
     sent_info = request.get_json()
-    queires.delete_stat(sent_info['stat'])
+    queires.delete_stat(sent_info["stat"])
     return jsonify(True)
 
-@app.route("/api/delete-board",methods=["POST"])
+
+@app.route("/api/delete-board", methods=["POST"])
 def delete_board():
     sent_info = request.get_json()
-    print("informatii primte :   ",sent_info)
+    print("informatii primte :   ", sent_info)
     queires.delete_board(sent_info)
     return jsonify(True)
+
 
 def main():
     app.run(debug=True)
@@ -175,6 +168,7 @@ def main():
             "/favicon.ico",
             redirect_to=url_for("static", filename="favicon/favicon.ico"),
         )
+
 
 @app.route("/login")
 def login():

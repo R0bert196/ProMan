@@ -1,42 +1,25 @@
-import { domManager } from "../view/domManager.js";
-import { boardBuilder } from "../view/htmlFactory.js";
-import { apiPost } from "../data/dataHandler.js";
-import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { boardsManager } from "../controller/boardsManager.js";
 import { dataHandler } from "../data/dataHandler.js";
 
-const button = document.querySelector(".buttonAddBoard");
 const buttonDeleteColumn = document.querySelector(".buttonDeleteColumn");
-//baga un event listener pe buton si creeaza boardul pe care il si baga in baza de date
 
 export let addEvents = {
   createBoard: async function () {
-    // let title = 'Board-Hard-Codat';
-    // button.addEventListener('click', () => dataHandler.createNewBoard(title))
-    // let orice = button.addEventListener('click', () => dataHandler.createNewBoard(title))
-    // console.log(orice)
     document
       .querySelector(".buttonAddBoard")
       .addEventListener("click", async (e) => {
-        // e.target.parentElement.preventDefault();
         const respone = await dataHandler.createNewBoard("New Board");
         if (respone.created) {
           boardsManager.loadBoards();
         }
       });
-
-    // // let content = boardBuilder(newBoard);
-    // const boardBuilder = htmlFactory(htmlTemplates.board);
-    // domManager.addChild(content);
   },
   createStatus: async function () {
     document
       .querySelector(".buttonAddColumn")
       .addEventListener("click", async (e) => {
         const respone = await dataHandler.createNewStatus();
-        // const ul = document.querySelector(".statuses").innerHTML = ''
-        // addEvents.deleteStatuses();
-        location.reload()
+        location.reload();
         if (respone.created) {
           boardsManager.loadBoards();
         }
@@ -58,11 +41,10 @@ export let addEvents = {
     console.log(ul.children);
     Array.from(ul.children).forEach((child) => {
       child.addEventListener("click", () => {
-        popup.style.display = 'none';
+        popup.style.display = "none";
         location.reload();
-        dataHandler.deleteStatuses({ stat_id: child.dataset.statusId })
-      }
-      );
+        dataHandler.deleteStatuses({ stat_id: child.dataset.statusId });
+      });
     });
   },
 };
@@ -72,4 +54,3 @@ buttonDeleteColumn.addEventListener("click", () => {
     ? (popup.style.display = "none")
     : (popup.style.display = "block");
 });
-

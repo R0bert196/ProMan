@@ -3,7 +3,6 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
 
-const boardHeader = domManager.querySelector(".board-header");
 
 export let boardsManager = {
   loadBoards: async function () {
@@ -83,10 +82,10 @@ async function showHideButtonHandler(clickEvent) {
     clickEvent.target.classList.remove("hidden");
     const uniqueStatuses = await dataHandler.getStatuses();
     const boardContent = await dataHandler.getBoardContent(boardId);
+
     //generate html for each column
     clickEvent.target.parentElement.nextElementSibling.innerHTML = "";
     uniqueStatuses.forEach((uniqueStatus) => {
-      //aici intra factory de coloana
       const boardBuilder = htmlFactory(htmlTemplates.status);
 
       const content = boardBuilder(uniqueStatus);
