@@ -6,7 +6,7 @@ ProMan is a collaborative work management app designed to track team projects, t
 ---
 ![homePage](https://i.imgur.com/WZ3i7yZ.png)
 ![homePage2](https://i.imgur.com/X5y8y9m.png)
-![homePage3](https://i.imgur.com/Khs6kPj.png)
+![homePage3](https://i.imgur.com/k0e9T6Q.png)
 ![homePage4](https://i.imgur.com/e9HVNKA.png)
 
 
